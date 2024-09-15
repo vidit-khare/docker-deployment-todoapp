@@ -17,3 +17,4 @@ steps:
     dockerComposeFile: '**/docker-compose.yml'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'run'
+    dockerComposePath: $(dockerComposePath)\docker-compose.exe
