@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  name: 'MySelfHosted'
+  name: 'MySelfHosted' # This will be name of your self-hosted Agent pool
 
 steps:
 - task: DockerCompose@1
@@ -17,5 +17,5 @@ steps:
     dockerComposeFile: '**/docker-compose.yml'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'up --build -d'
-    dockerComposePath: $(dockerComposePath)\docker-compose.exe
-    projectName: todoapp
+    dockerComposePath: $(DockerComposePath)\docker-compose.exe
+    projectName: todoapp 
