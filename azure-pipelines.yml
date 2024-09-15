@@ -16,6 +16,6 @@ steps:
     dockerRegistryEndpoint: 'DockerHub_Connection'
     dockerComposeFile: '**/docker-compose.yml'
     action: 'Run a Docker Compose command'
-    dockerComposeCommand: 'up'
+    dockerComposeCommand: 'up --build -d'
     dockerComposePath: $(dockerComposePath)\docker-compose.exe
     projectName: todoapp
