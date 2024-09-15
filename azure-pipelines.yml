@@ -18,3 +18,4 @@ steps:
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'run'
     dockerComposePath: $(dockerComposePath)\docker-compose.exe
+    projectName: todoapp
