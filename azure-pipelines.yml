@@ -4,18 +4,18 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+  - main
 
 pool:
-  name: 'MySelfHosted' # This will be name of your self-hosted Agent pool
+  name: {SelfHostedAgentPoolName} # This will be name of your self-hosted Agent pool
 
 steps:
 - task: DockerCompose@1
   inputs:
     containerregistrytype: 'Container Registry'
-    dockerRegistryEndpoint: 'DockerHub_Connection'
+    dockerRegistryEndpoint: 'DockerHub_Connection' # Service Connection for Docker Hub Registry
     dockerComposeFile: '**/docker-compose.yml'
-    action: 'Run a Docker Compose command'
+    action: 'Build & Run Docker Compose Application'
     dockerComposeCommand: 'up --build -d'
     dockerComposePath: $(DockerComposePath)\docker-compose.exe
     projectName: todoapp 
