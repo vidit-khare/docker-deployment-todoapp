@@ -11,6 +11,9 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+- task: DockerInstaller@0
+  inputs:
+    dockerVersion: "17.09.0-ce"
 - task: DockerCompose@1
   inputs:
     containerregistrytype: 'Container Registry'
