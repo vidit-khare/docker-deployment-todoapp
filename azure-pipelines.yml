@@ -7,7 +7,7 @@ trigger:
   - main
 
 pool:
-  name: {SelfHostedAgentPoolName} # This will be name of your self-hosted Agent pool
+  name: $(SelfHostedAgentPoolName) # This will be name of your self-hosted Agent pool
 
 steps:
 - task: DockerCompose@1
