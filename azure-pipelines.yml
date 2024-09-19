@@ -7,18 +7,9 @@ trigger:
   - main
 
 pool:
-  #name: $(SelfHostedAgentPoolName) # This will be name of your self-hosted Agent pool
-  vmImage: 'windows-latest'
+  name: $(SelfHostedAgentPoolName) # This will be name of your self-hosted Agent pool
 
 steps:
-- task: DockerInstaller@0
-  inputs:
-    dockerVersion: "17.09.0-ce"
-
-- script: |
-    Invoke-WebRequest "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Windows-x86_64.exe" -OutFile "$env:ProgramFiles\Docker\docker-compose.exe"
-    [System.IO.File]::Move("$env:ProgramFiles\Docker\docker-compose-Windows-x86_64.exe", "$env:ProgramFiles\Docker\docker-compose.exe")
-  displayName: 'Install Docker Compose'
 - task: DockerCompose@1
   inputs:
     containerregistrytype: 'Container Registry'
@@ -26,5 +17,5 @@ steps:
     dockerComposeFile: '**/docker-compose.yml'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'up --build -d'
-    #dockerComposePath: $(DockerComposePath)\docker-compose.exe
+    dockerComposePath: $(DockerComposePath)\docker-compose.exe
     projectName: todoapp 
