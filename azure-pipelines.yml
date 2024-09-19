@@ -21,5 +21,5 @@ steps:
     dockerComposeFile: '**/docker-compose.yml'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'up --build -d'
-    dockerComposePath: $(DockerComposePath)\docker-compose.exe
+    #dockerComposePath: $(DockerComposePath)\docker-compose.exe
     projectName: todoapp 
