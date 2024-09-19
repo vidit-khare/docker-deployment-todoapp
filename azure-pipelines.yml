@@ -16,8 +16,8 @@ steps:
     dockerVersion: "17.09.0-ce"
 
 - script: |
-    curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Windows-x86_64.exe" -OutFile "$env:ProgramFiles\Docker\docker-compose.exe"
+    [System.IO.File]::Move("$env:ProgramFiles\Docker\docker-compose-Windows-x86_64.exe", "$env:ProgramFiles\Docker\docker-compose.exe")
   displayName: 'Install Docker Compose'
 - task: DockerCompose@1
   inputs:
