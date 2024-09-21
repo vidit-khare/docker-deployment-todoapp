@@ -20,4 +20,4 @@ RUN useradd -m appuser
 USER appuser
 
 # Run app.py when the container launches
-CMD ["python3", "Backend/app.py"]
+CMD ["python3", "/app/src/main.py"]
