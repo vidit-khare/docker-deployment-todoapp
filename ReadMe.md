@@ -1,30 +1,52 @@
 # Docker Deployment Todo App
 
-This repository contains a simple Todo application that is containerized using Docker and Docker Compose. The application is designed to demonstrate how to deploy a web application using Docker and automate the deployment process using Azure Pipelines.
+This repository contains the source code and configuration files for deploying a Todo application using Docker and Docker Compose.
 
 ## Table of Contents
 
+- Project Structure
 - Prerequisites
-- Installation
-- Usage
-- CI/CD with Azure Pipelines
+- Setup Instructions
+- Environment Variables Setup
+- Running the Application
 - Contributing
 - License
+
+## Project Structure
+
+```
+docker-deployment-todoapp/
+├── backend/
+│   ├── src/
+│   │   ├── main.py
+│   ├── requirements.txt
+│   ├── Dockerfile
+├── database/
+│   ├── init.sql
+│   ├── Dockerfile
+├── frontend/
+│   ├── templates/
+│   │   ├── index.html
+│   ├── static/
+│   │   ├── scripts.js
+│   │   ├── styles.css
+├── .env
+├── nginx.conf
+├── docker-compose.yml
+├── README.md
+
+```
 
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
 
-- You have installed Docker and Docker Compose if you want to run it directly.
 
-For running it using Azure DevOps pipeline. Please Ensure following.
+- Docker
+- Docker Compose
 
-- You have an Azure DevOps account and have set up a project.
-- You have a basic understanding of Docker, Docker Compose, and Azure YAML concepts.
 
-Please refer this article to setup and run it using Azure DevOps pipeline.
-
-## Installation
+## Setup Instructions
 
 1. **Clone the repository:**
 
@@ -36,7 +58,9 @@ Please refer this article to setup and run it using Azure DevOps pipeline.
     cd docker-deployment-todoapp
     ```
 
-2. **Define Environment Variables**
+## Environment Variables Setup
+
+1. **Define Environment Variables**
 
 This project uses a `.env` file to manage environment variables. Follow these steps to set up your environment variables:
 
@@ -46,7 +70,9 @@ This project uses a `.env` file to manage environment variables. Follow these st
     touch .env
     ```
 
-- **Add your environment variables to the `.env` file:**
+- **Add your environment variables to the `.env` file:** 
+
+    **Note:** Setup variable values as per your requirement. The below config shows placeholder values.
 
     ```env
     POSTGRES_DB=your_database_name
@@ -62,36 +88,26 @@ Docker Compose will automatically load the variables from the `.env` file. Ensur
 3. **Build and run the Docker containers using Docker Compose:**
 
     ```sh
-    docker-compose up --build -d
+    docker-compose -p mytodoapp up --build -d
     ```
 
-## Usage
+## Running the Application
 
-Once the containers are running, you can access the Todo application by navigating to `http://localhost:5001` in your web browser.
+This setup uses nginx as web server and hence you can reach your application on localhost at port 80. The other way is using flask url which is running on port 5001.
 
-### Stopping the Containers
+**Endpoints-** Once the containers are running, you can access the Todo application by navigating to below urls in your web browser.
+
+
+`http://localhost`
+
+`http://localhost:5001`
+
 
 To stop the running containers, use the following command:
 
 ```sh
-docker-compose down
+docker-compose -p mytodoapp down
 ```
-
-## CI/CD with Azure Pipelines
-
-This project uses Azure Pipelines for continuous integration and continuous deployment.
-
-### Setting Up Azure Pipelines
-
-1. **Create a new pipeline in your Azure DevOps project.**
-2. **Configure the pipeline to use the `azure-pipelines.yml` file from this repository.**
-3. **Add your environment variables as pipeline variables:**
-    - Navigate to your pipeline in Azure DevOps.
-    - Go to the **Variables** tab.
-    - Add the variables `POSTGRES_DB`, `POSTGRES_USER`, and `POSTGRES_PASSWORD` with their respective values. 
-4. **Run the pipeline to build and deploy the application.**
-
-The `azure-pipelines.yml` file contains the necessary steps to build the Docker images, push them to a container registry, and deploy the application.
 
 ## Contributing
 
