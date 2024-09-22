@@ -109,6 +109,18 @@ To stop the running containers, use the following command:
 docker-compose -p mytodoapp down
 ```
 
+## Scaling the Application
+
+You can scale your application by using --scale flag.
+
+Scale specific service for eg. database/
+
+    ```sh
+     docker-compose -p mytodoapp up --scale database=3 -d
+    ```
+
+**Note:** Make sure the number of ports are available while scaling the application otherwise update docker-compose to cater for more ports for the service you want to scale.
+
 ## Contributing
 
 Contributions are always welcome! Please follow these steps to contribute:
