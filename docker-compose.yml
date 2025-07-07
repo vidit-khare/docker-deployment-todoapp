@@ -8,13 +8,20 @@ services:
       - ./frontend:/usr/share/nginx/html
     networks:
       - todo_app_network
+    stdin_open: true # Keep stdin open for interactive mode
+    tty: true # Allocate a pseudo-TTY
+    depends_on:  # Ensure web service starts after backend services
+      - backend
 
   database:
     build: ./database
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+    # environment:
+    #   POSTGRES_USER: ${POSTGRES_USER}
+    #   POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    #   POSTGRES_DB: ${POSTGRES_DB}
+    env_file:
+      - ./env/postgres.env
+    container_name: todo_postgres
     ports:
       - "5432-5436:5432"
     volumes:
@@ -26,12 +33,14 @@ services:
     build: ./backend
     depends_on:
       - database
-    environment:
-      FLASK_ENV: ${FLASK_ENV}
-      DB_HOST: database
-      DB_NAME: ${POSTGRES_DB}
-      DB_USER: ${POSTGRES_USER}
-      DB_PASSWORD: ${POSTGRES_PASSWORD}
+    # environment:
+    #   FLASK_ENV: ${FLASK_ENV}
+    #   DB_HOST: database
+    #   DB_NAME: ${POSTGRES_DB}
+    #   DB_USER: ${POSTGRES_USER}
+    #   DB_PASSWORD: ${POSTGRES_PASSWORD}
+    env_file:
+      - ./env/backend.env
     ports:
       - "5001-5005:5001"
     volumes:
